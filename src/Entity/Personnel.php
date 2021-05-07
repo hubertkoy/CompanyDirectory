@@ -23,7 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "firstName": "partial",
  *     "lastName": "partial",
  *     "jobTitle": "partial",
- *     "email": "partial"
+ *     "email": "partial",
+ *     "departmentID.name": "partial"
  * })
  */
 class Personnel
@@ -71,6 +72,7 @@ class Personnel
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="personnels")
      * @ORM\JoinColumn(name="departmentID", referencedColumnName="id")
+     * @Groups({"personnel:read", "personnel:write"})
      */
     private $departmentID;
 

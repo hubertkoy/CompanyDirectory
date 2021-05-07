@@ -32,14 +32,14 @@ class Department
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank()
      * @Assert\Length(min=2, max=50, maxMessage="Name your Department in 50 chars or less.")
-     * @Groups({"department:read", "department:write", "location:read"})
+     * @Groups({"department:read", "department:write", "location:read", "personnel:read"})
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="departments")
      * @ORM\JoinColumn(name="locationID", referencedColumnName="id")
-     * @Groups({"department:read", "department:write"})
+     * @Groups({"department:read", "department:write", "personnel:read"})
      */
     private $locationID;
 
