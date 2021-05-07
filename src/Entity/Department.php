@@ -7,12 +7,15 @@ use App\Repository\DepartmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get", "post"},
- *     itemOperations={"get", "put", "delete", "patch"}
+ *     itemOperations={"get", "put", "delete", "patch"},
+ *     normalizationContext={"groups"="department:read"},
+ *     denormalizationContext={"groups"="department:write"}
  * )
  * @ORM\Entity(repositoryClass=DepartmentRepository::class)
  */
@@ -29,17 +32,20 @@ class Department
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank()
      * @Assert\Length(min=2, max=50, maxMessage="Name your Department in 50 chars or less.")
+     * @Groups({"department:read", "department:write", "location:read"})
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="departments")
      * @ORM\JoinColumn(name="locationID", referencedColumnName="id")
+     * @Groups({"department:read", "department:write"})
      */
     private $locationID;
 
     /**
      * @ORM\OneToMany(targetEntity=Personnel::class, mappedBy="departmentID")
+     * @Groups({"department:read"})
      */
     private $personnels;
 

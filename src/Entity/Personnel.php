@@ -7,12 +7,15 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\PersonnelRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get", "post"},
- *     itemOperations={"get", "put", "delete", "patch"}
+ *     itemOperations={"get", "put", "delete", "patch"},
+ *     normalizationContext={"groups"={"personnel:read"}},
+ *     denormalizationContext={"groups"={"personnel:write"}}
  * )
  * @ORM\Entity(repositoryClass=PersonnelRepository::class)
  * @ApiFilter(SearchFilter::class,
@@ -37,6 +40,7 @@ class Personnel
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
      * @Assert\Length(min=2, max=50, maxMessage="Type First Name in 50 chars or less.")
+     * @Groups({"personnel:read", "personnel:write", "department:read"})
      */
     private $firstName;
 
@@ -45,12 +49,14 @@ class Personnel
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
      * @Assert\Length(min=2, max=50, maxMessage="Type Last Name in 50 chars or less.")
+     * @Groups({"personnel:read", "personnel:write", "department:read"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Length(max=50, maxMessage="Type Job Title in 50 chars or less.")
+     * @Groups({"personnel:read", "personnel:write", "department:read"})
      */
     private $jobTitle;
 
@@ -58,6 +64,7 @@ class Personnel
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Email()
      * @Assert\Length(max=50, maxMessage="Type Email in 50 chars or less.")
+     * @Groups({"personnel:read", "personnel:write", "department:read"})
      */
     private $email;
 
