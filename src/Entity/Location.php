@@ -7,9 +7,13 @@ use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete", "patch"}
+ * )
  * @ORM\Entity(repositoryClass=LocationRepository::class)
  */
 class Location
@@ -23,6 +27,8 @@ class Location
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=2, max=50, maxMessage="Name Location in 50 chars or less.")
      */
     private $name;
 

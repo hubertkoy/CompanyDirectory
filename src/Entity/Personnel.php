@@ -2,13 +2,26 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\PersonnelRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete", "patch"}
+ * )
  * @ORM\Entity(repositoryClass=PersonnelRepository::class)
+ * @ApiFilter(SearchFilter::class,
+ *     properties={
+ *     "firstName": "partial",
+ *     "lastName": "partial",
+ *     "jobTitle": "partial",
+ *     "email": "partial"
+ * })
  */
 class Personnel
 {
@@ -21,21 +34,30 @@ class Personnel
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(min=2, max=50, maxMessage="Type First Name in 50 chars or less.")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(min=2, max=50, maxMessage="Type Last Name in 50 chars or less.")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=50, maxMessage="Type Job Title in 50 chars or less.")
      */
     private $jobTitle;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Email()
+     * @Assert\Length(max=50, maxMessage="Type Email in 50 chars or less.")
      */
     private $email;
 
