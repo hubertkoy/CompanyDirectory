@@ -20,12 +20,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "get" = { "security" = "is_granted('ROLE_USER')" },
  *     "put" = { "security" = "is_granted('ROLE_ADMIN')" },
  *     "delete" = { "security" = "is_granted('ROLE_ADMIN')" },
- *     "patch" =  { "security" = "is_granted('ROLE_ADMIN')" }
+ *     "patch" = { "security" = "is_granted('ROLE_ADMIN')" }
  * },
  *     normalizationContext={"groups"="department:read"},
  *     denormalizationContext={"groups"="department:write"}
  * )
  * @ORM\Entity(repositoryClass=DepartmentRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Department
 {
@@ -119,5 +120,14 @@ class Department
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function deleteDepartment(): void
+    {
+        if (!$this->getPersonnels()->isEmpty())
+            throw new \Exception("Department have assigned Personnel and cannot be removed.");
     }
 }

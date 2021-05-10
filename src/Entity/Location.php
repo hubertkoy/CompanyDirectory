@@ -26,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     denormalizationContext={"groups"={"location:write"}}
  * )
  * @ORM\Entity(repositoryClass=LocationRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Location
 {
@@ -100,5 +101,15 @@ class Location
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function removeLocation(): void
+    {
+        if (!$this->getDepartments()->isEmpty()) {
+            throw new \Exception('Location have assigned Departments and cannot be removed.');
+        }
     }
 }
