@@ -5,8 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Generator;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
@@ -20,6 +18,12 @@ class UserFixtures extends Fixture
             $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$dUdVR3lPTFZxNHNTL3hDeA$YT9+E6h1YoYckaoMu8b30FVEH4s86P/Q4zNXcNolKwg');
             $manager->persist($user);
         }
+        $admin = new User();
+        $admin->setEmail('admin@example.com');
+        $admin->setUsername('admin');
+        $admin->setPassword('$argon2id$v=19$m=65536,t=4,p=1$dUdVR3lPTFZxNHNTL3hDeA$YT9+E6h1YoYckaoMu8b30FVEH4s86P/Q4zNXcNolKwg');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $manager->persist($admin);
 
         $manager->flush();
     }
