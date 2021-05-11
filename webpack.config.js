@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const path = require('path');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -20,8 +21,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/styles/app.css')
-    .addEntry('app', './assets/app.js')
+    .addEntry('app', './assets/js/app.js')
     .addEntry('departments', './assets/js/departments.js')
     .addEntry('locations', './assets/js/locations.js')
     .addEntry('personnel', './assets/js/personnel.js')
@@ -61,9 +61,17 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
-    .enableVueLoader(()=>{}, {
+    .enableVueLoader((options)=>{}, {
         version: 3
     })
+
+    // gives better module CSS naming in dev
+    .configureCssLoader((config) => {
+        if (!Encore.isProduction() && config.modules) {
+            config.modules.localIdentName = '[name]_[local]_[hash:base64:5]';
+        }
+    })
+
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
