@@ -34,6 +34,7 @@ class Location
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"location:read"})
      */
     private $id;
 
@@ -41,7 +42,7 @@ class Location
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank()
      * @Assert\Length(min=2, max=50, maxMessage="Name Location in 50 chars or less.")
-     * @Groups({"location:read", "location:write", "personnel:read"})
+     * @Groups({"location:read", "location:write", "personnel:read", "department:read"})
      */
     private $name;
 
