@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Repository\DepartmentRepository;
 use App\Repository\PersonnelRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -41,6 +42,7 @@ class Personnel
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", length=11, nullable=false)
+     * @Groups({"personnel:read"})
      */
     private $id;
 
@@ -147,5 +149,15 @@ class Personnel
         $this->departmentID = $departmentID;
 
         return $this;
+    }
+
+    public function getDepartment(): ?string
+    {
+        return $this->departmentID?->getName();
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->departmentID?->getLocationID()->getName();
     }
 }
