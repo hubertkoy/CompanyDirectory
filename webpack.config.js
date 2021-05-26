@@ -22,9 +22,6 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    .addEntry('departments', './assets/js/departments.js')
-    .addEntry('locations', './assets/js/locations.js')
-    .addEntry('personnel', './assets/js/personnel.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
