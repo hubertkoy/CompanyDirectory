@@ -26,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     normalizationContext={"groups"={"personnel:read"}},
  *     denormalizationContext={"groups"={"personnel:write"}}
  * )
+ * @ORM\Table(name="personnel")
  * @ORM\Entity(repositoryClass=PersonnelRepository::class)
  * @ApiFilter(SearchFilter::class,
  *     properties={

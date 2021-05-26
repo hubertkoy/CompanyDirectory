@@ -25,6 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     normalizationContext={"groups"="department:read"},
  *     denormalizationContext={"groups"="department:write"}
  * )
+ * @ORM\Table(name="department")
  * @ORM\Entity(repositoryClass=DepartmentRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
