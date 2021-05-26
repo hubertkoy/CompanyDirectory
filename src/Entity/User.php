@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ApiResource(
  *     collectionOperations={
- *     "get" = { "security" = "is_granted('ROLE_ADMIN')" },
+ *     "get" = { "security" = "is_granted('IS_AUTHENTICATED_ANONYMOUSLY')" },
  *     "post" = { "security" = "is_granted('ROLE_ADMIN')" }
  * },
  *     itemOperations={
