@@ -59,6 +59,7 @@ export default {
       fetch(this.target).then(response => response.json()).then(data => {
         if(data['departments'].length !== 0) {
           this.loading = false;
+          this.removed = true;
           this.statusCode = 403;
           this.errorMessage = `Location ${data.name} contain assigned department and cannot be removed.`
         } else {
