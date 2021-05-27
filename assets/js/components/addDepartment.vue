@@ -78,7 +78,7 @@ export default {
   methods: {
     create() {
       fetch('/api/departments', {
-        method: 'post',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },

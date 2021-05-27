@@ -85,7 +85,7 @@ export default {
     update() {
       this.loading = true;
       fetch(this.department['@id'], {
-        method: 'patch',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/merge-patch+json'
         },

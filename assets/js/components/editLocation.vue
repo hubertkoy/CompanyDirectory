@@ -73,7 +73,7 @@ export default {
   methods: {
     update() {
       fetch(this.target, {
-        method: 'patch',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/merge-patch+json'
         },

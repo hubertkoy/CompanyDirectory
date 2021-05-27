@@ -62,7 +62,7 @@ export default {
           this.loading = false;
         } else {
           fetch(this.target, {
-            method: 'delete',
+            method: 'DELETE',
             headers: {
               'Content-Type': 'application/merge-patch+json'
             },

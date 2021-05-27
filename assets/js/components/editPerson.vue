@@ -128,7 +128,7 @@ export default {
   methods: {
     update() {
       fetch(this.person, {
-        method: 'patch',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/merge-patch+json'
         },

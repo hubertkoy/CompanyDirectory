@@ -56,7 +56,7 @@ export default {
     create() {
       if(this.location['name'] !== '') {
         fetch('/api/locations', {
-          method: 'post',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },

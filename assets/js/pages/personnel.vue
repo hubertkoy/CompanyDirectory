@@ -174,7 +174,7 @@ export default {
     },
     removePerson() {
       fetch(this.personModal, {
-        method: 'delete',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/merge-patch+json'
         },

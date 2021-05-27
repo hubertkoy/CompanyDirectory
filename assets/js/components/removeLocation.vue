@@ -63,7 +63,7 @@ export default {
           this.errorMessage = `Location ${data.name} contain assigned department and cannot be removed.`
         } else {
           fetch(this.target, {
-            method: 'delete',
+            method: 'DELETE',
             headers: {
               'Content-Type': 'application/merge-patch+json'
             },
