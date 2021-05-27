@@ -59,6 +59,7 @@ export default {
         if(data['personnels'].length !== 0){
           this.statusCode = 403;
           this.errorMessage = 'This department has assigned personnel and cannot be removed.';
+          this.removed = true;
           this.loading = false;
         } else {
           fetch(this.target, {
