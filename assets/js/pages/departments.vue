@@ -18,24 +18,20 @@
       <table class="table">
         <thead>
         <tr>
-          <th scope="col">No.</th>
           <th scope="col">Name</th>
           <th colspan="2" scope="col">Location</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(department, index) in departments" :key="department['@id']">
-          <td>{{ index + 1 }}</td>
+        <tr v-for="department in departments" :key="department['@id']">
           <td>{{ department.name }}</td>
           <td>{{ department.locationID.name }}</td>
           <td class="text-end">
-
             <i class="fa fa-edit me-1"
                data-bs-target="#editDepartment"
                data-bs-toggle="modal"
                @click="target = department['@id']"
                ></i>
-
             <i class="fa fa-remove me-1"
                data-bs-target="#removeDepartment"
                data-bs-toggle="modal"

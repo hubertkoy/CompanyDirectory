@@ -18,13 +18,11 @@
       <table class="table">
         <thead>
         <tr>
-          <th>No.</th>
           <th colspan="2">Name</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(location, index) in locations">
-          <td>{{ index + 1 }}</td>
+        <tr v-for="location in locations">
           <td>{{ location.name }}</td>
           <td class="text-end">
             <i class="fa fa-edit me-1" data-bs-target="#editLocation" data-bs-toggle="modal" @click="target = location['@id']"></i>

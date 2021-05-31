@@ -44,7 +44,6 @@
       <table v-if="windowWidth > 991" class="table">
         <thead>
         <tr>
-          <th scope="col">No.</th>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Job Title</th>
@@ -55,8 +54,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(person, index) in personnel">
-          <td>{{ index + 1 }}</td>
+        <tr v-for="person in personnel">
           <td>{{ person.firstName }}</td>
           <td>{{ person.lastName }}</td>
           <td>{{ person.jobTitle }}</td>
@@ -93,15 +91,13 @@
         </caption>
         <thead>
         <tr>
-          <th scope="col">No.</th>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(person, index) in personnel" :key="person['@id']">
-          <td>{{ index + 1 }}</td>
+        <tr v-for="person in personnel" :key="person['@id']">
           <td>{{ person.firstName }}</td>
           <td>{{ person.lastName }}</td>
           <td>
