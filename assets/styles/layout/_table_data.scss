@@ -1,0 +1,18 @@
+th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.table-container {
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+thead {
+  border-bottom: 1px solid black !important;
+}
+
+th {
+  background-color: white !important;
+}
