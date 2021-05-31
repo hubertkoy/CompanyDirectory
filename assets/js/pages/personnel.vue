@@ -37,82 +37,94 @@
     </div>
     <div v-if="personnel.length > 0 && !loading">
       <div class="text-end">
-      <h2 class="text-decoration-underline text-start">Personnel</h2>
-      <button class="btn btn-secondary" data-bs-target="#addPerson" data-bs-toggle="modal"><i class="fa fa-plus"></i> Add person</button>
+        <h2 class="text-decoration-underline text-start">Personnel</h2>
+        <button class="btn btn-secondary" data-bs-target="#addPerson" data-bs-toggle="modal"><i class="fa fa-plus"></i>
+          Add person
+        </button>
       </div>
       <!-- personnel main view start -->
-      <table v-if="windowWidth > 991" class="table">
-        <thead>
-        <tr>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Job Title</th>
-          <th scope="col">Email</th>
-          <th scope="col">Department</th>
-          <th scope="col">Location</th>
-          <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="person in personnel">
-          <td>{{ person.firstName }}</td>
-          <td>{{ person.lastName }}</td>
-          <td>{{ person.jobTitle }}</td>
-          <td>{{ person.email }}</td>
-          <td>{{ person.department }}</td>
-          <td>{{ person.location }}</td>
-          <td>
-            <i :data-id="person['@id']" class="fa fa-edit me-1" data-bs-target="#staticBackdrop" data-bs-toggle="modal"
-               @click="getPerson"></i>
-            <i :data-id="person['@id']" class="fa fa-user-times" data-bs-target="#removePerson" data-bs-toggle="modal"
-               @click="getPerson"></i>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <table v-if="personnel.length > 0 && windowWidth <= 991" class="table caption-top">
-        <caption>
-          <ul class="list-group list-group-horizontal border-bottom">
-            <li class="list-group-item col-6 border-0">
-              <i class="fa fa-tag legend"></i> Job Title
-            </li>
-            <li class="list-group-item col-6 border-0">
-              <i class="fa fa-building legend"></i> Department
-            </li>
-          </ul>
-          <ul class="list-group list-group-horizontal">
-            <li class="list-group-item col-6 border-0">
-              <i class="fa fa-at legend"></i> Email
-            </li>
-            <li class="list-group-item col-6 border-0">
-              <i class="fa fa-globe legend"></i> Location
-            </li>
-          </ul>
-        </caption>
-        <thead>
-        <tr>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Details</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="person in personnel" :key="person['@id']">
-          <td>{{ person.firstName }}</td>
-          <td>{{ person.lastName }}</td>
-          <td>
-            <i v-popover="person.jobTitle" class="fa fa-tag me-1" tabindex="0" title="Job Title"></i>
-            <i v-popover="person.email" class="fa fa-at me-1" tabindex="0" title="Email"></i>
-            <i v-popover="person.department" class="fa fa-building me-1" tabindex="0" title="Department"></i>
-            <i v-popover="person.location" class="fa fa-globe me-1" tabindex="0" title="Location"></i>
-            <i :data-id="person['@id']" class="fa fa-edit me-1" data-bs-target="#staticBackdrop" data-bs-toggle="modal"
-               @click="getPerson"></i>
-            <i :data-id="person['@id']" class="fa fa-user-times" data-bs-target="#removePerson" data-bs-toggle="modal"
-               @click="getPerson"></i>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+
+      <div class="table-container" id="table-full" @scroll="getScrollPosition">
+        <table v-if="windowWidth > 991" class="table">
+          <thead>
+          <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Email</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+            <th scope="col">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="person in personnel">
+            <td>{{ person.firstName }}</td>
+            <td>{{ person.lastName }}</td>
+            <td>{{ person.jobTitle }}</td>
+            <td>{{ person.email }}</td>
+            <td>{{ person.department }}</td>
+            <td>{{ person.location }}</td>
+            <td>
+              <i :data-id="person['@id']" class="fa fa-edit me-1" data-bs-target="#staticBackdrop"
+                 data-bs-toggle="modal"
+                 @click="getPerson"></i>
+              <i :data-id="person['@id']" class="fa fa-user-times" data-bs-target="#removePerson" data-bs-toggle="modal"
+                 @click="getPerson"></i>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-if="personnel.length > 0 && windowWidth <= 991" class="table-container" id="table-mobile" @scroll="getScrollPosition">
+        <table class="table caption-top">
+          <caption>
+            <ul class="list-group list-group-horizontal border-bottom">
+              <li class="list-group-item col-6 border-0">
+                <i class="fa fa-tag legend"></i> Job Title
+              </li>
+              <li class="list-group-item col-6 border-0">
+                <i class="fa fa-building legend"></i> Department
+              </li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item col-6 border-0">
+                <i class="fa fa-at legend"></i> Email
+              </li>
+              <li class="list-group-item col-6 border-0">
+                <i class="fa fa-globe legend"></i> Location
+              </li>
+            </ul>
+          </caption>
+          <thead>
+          <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Details</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="person in personnel" :key="person['@id']">
+            <td>{{ person.firstName }}</td>
+            <td>{{ person.lastName }}</td>
+            <td>
+              <i v-popover="person.jobTitle" class="fa fa-tag me-1" tabindex="0" title="Job Title"></i>
+              <i v-popover="person.email" class="fa fa-at me-1" tabindex="0" title="Email"></i>
+              <i v-popover="person.department" class="fa fa-building me-1" tabindex="0" title="Department"></i>
+              <i v-popover="person.location" class="fa fa-globe me-1" tabindex="0" title="Location"></i>
+              <i :data-id="person['@id']" class="fa fa-edit me-1" data-bs-target="#staticBackdrop"
+                 data-bs-toggle="modal"
+                 @click="getPerson"></i>
+              <i :data-id="person['@id']" class="fa fa-user-times" data-bs-target="#removePerson" data-bs-toggle="modal"
+                 @click="getPerson"></i>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <button @click="goTop" ref="goTopBtn" id="goTopBtn" title="Go to top"><i class="fa fa-arrow-up"></i></button>
     </div>
   </div>
 </template>
@@ -147,6 +159,18 @@ export default {
     },
   },
   methods: {
+    getScrollPosition(el) {
+      if(el.target.scrollTop > 200){
+        this.$refs.goTopBtn.style.display = 'block';
+      } else {
+        this.$refs.goTopBtn.style.display = 'none';
+      }
+    },
+    goTop() {
+      const target = window.innerWidth <= 991 ? 'table-mobile' : 'table-full'
+      const element = document.getElementById(target);
+      element.scrollTop = 0;
+    },
     async getPersonnel() {
       this.loading = true
       await fetch('/api/personnels')
@@ -154,7 +178,7 @@ export default {
           .then(data => {
             data = data['hydra:member'];
             for (let i = 0; i < data.length; i++) {
-              if(data[i]['departmentID']) {
+              if (data[i]['departmentID']) {
                 data[i].department = data[i]['departmentID']['name'];
                 data[i].location = data[i]['departmentID']['locationID']['name'];
                 delete data[i]['departmentID'];
@@ -188,5 +212,24 @@ export default {
 <style lang="scss" scoped>
 .legend {
   width: 22px;
+}
+#goTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 5vh;
+  right: 30px;
+  z-index: 99;
+  font-size: 10px;
+  border: none;
+  outline: none;
+  background-color: rgba(83, 83, 83, 0.70);
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+#goTopBtn:hover {
+  background-color: #555;
 }
 </style>

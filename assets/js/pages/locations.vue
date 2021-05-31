@@ -14,7 +14,7 @@
     </div>
     Loading...
   </div>
-    <div v-show="locations.length > 0" class="table-responsive">
+    <div v-show="locations.length > 0" class="table-container">
       <table class="table">
         <thead>
         <tr>

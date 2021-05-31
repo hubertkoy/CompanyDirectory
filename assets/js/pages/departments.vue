@@ -14,7 +14,7 @@
       </div>
       Loading...
     </div>
-    <div v-if="!loading" class="table-responsive">
+    <div v-if="!loading" class="table-container">
       <table class="table">
         <thead>
         <tr>
