@@ -1,14 +1,14 @@
 <template>
-  <navbar
-      :currentPage="currentPage"
-      @showPage="loadPage"
-  />
-  <div class="container">
-    <locations v-if="currentPage === 'locations'"/>
-    <departments v-if="currentPage === 'departments'"/>
-    <personnel v-if="currentPage === 'personnel'"/>
-    <top-button></top-button>
-  </div>
+    <navbar
+        :currentPage="currentPage"
+        @showPage="loadPage"
+    />
+    <div class="container">
+      <locations v-if="currentPage === 'locations'"/>
+      <departments v-if="currentPage === 'departments'"/>
+      <personnel v-if="currentPage === 'personnel'"/>
+<!--      <top-button></top-button>-->
+    </div>
 </template>
 
 <script>
@@ -30,8 +30,6 @@ export default {
     Locations,
     Departments,
     Navbar
-  },
-  mounted() {
   },
   methods: {
     loadPage(value) {
