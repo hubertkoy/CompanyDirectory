@@ -7,6 +7,7 @@
     <locations v-if="currentPage === 'locations'"/>
     <departments v-if="currentPage === 'departments'"/>
     <personnel v-if="currentPage === 'personnel'"/>
+    <top-button></top-button>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import Navbar from "../components/navbar";
 import Departments from "./departments";
 import Locations from './locations';
 import Personnel from "./personnel";
+import TopButton from "../components/topButton";
 
 export default {
   name: "index",
@@ -23,6 +25,7 @@ export default {
     currentPage: 'personnel',
   }),
   components: {
+    TopButton,
     Personnel,
     Locations,
     Departments,
