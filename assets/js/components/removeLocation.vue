@@ -15,7 +15,7 @@
           <div v-if="statusCode !== 204 && statusCode !== 0" id="alertError"
                class="alert alert-warning alert-dismissible mt-3 fade show"
                role="alert">
-            <strong>Warning!</strong> Error occur: {{ errorMessage }}
+            <strong>Warning!</strong><br> {{ errorMessage }}
           </div>
         </div>
         <div class="modal-body">
@@ -25,7 +25,7 @@
               </div>
               Loading...
             </div>
-            <p v-if="!removed || !loading">Are you sure you want delete this location?</p>
+            <p v-if="!removed && !loading">Are you sure you want delete this location?</p>
           </div>
         </div>
         <div class="modal-footer">
@@ -52,6 +52,27 @@ export default {
       type: String,
       required: true,
     },
+  },
+  watch: {
+    target: {
+      deep: true,
+      handler: function (location) {
+        this.loading = true;
+        fetch(location).then(response => response.json()).then(data => {
+          if(data['departments'].length !== 0){
+            this.statusCode = 403;
+            this.errorMessage = `Location ${data.name} contain assigned department and cannot be removed.`;
+            this.removed = true;
+            this.loading = false;
+          } else {
+            this.statusCode = 0;
+            this.removed = false;
+            this.errorMessage = '';
+            this.loading = false;
+          }
+        });
+      }
+    }
   },
   methods: {
     remove() {

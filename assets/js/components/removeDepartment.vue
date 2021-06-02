@@ -15,7 +15,7 @@
           <div v-if="statusCode !== 204 && statusCode !== 0" id="alertError"
                class="alert alert-warning alert-dismissible mt-3 fade show"
                role="alert">
-            <strong>Warning!</strong> Error occur: {{ errorMessage }}
+            <strong>Warning!</strong><br>{{ errorMessage }}
           </div>
         </div>
         <div class="modal-body">
@@ -51,6 +51,26 @@ export default {
       type: String,
       required: true
     },
+  },
+  watch: {
+    target: {
+      deep: true,
+      handler: function (department) {
+        this.loading = true;
+        fetch(department).then(response => response.json()).then(data => {
+          if(data['personnels'].length !== 0){
+            this.statusCode = 403;
+            this.errorMessage = 'This department has assigned personnel and cannot be removed.';
+            this.removed = true;
+            this.loading = false;
+          } else {
+            this.statusCode = 0;
+            this.errorMessage = '';
+            this.loading = false;
+          }
+        });
+      }
+    }
   },
   methods: {
     remove() {
