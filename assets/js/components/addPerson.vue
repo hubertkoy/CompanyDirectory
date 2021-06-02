@@ -30,36 +30,36 @@
           <form @input="errorMessage=''; statusCode=0;">
             <!-- first Name -->
             <div class="mb-3">
-              <label class="form-label" for="personFirstName">First Name</label>
-              <input id="personFirstName" v-model="person.firstName" class="form-control" name="firstName" type="text">
+              <label class="form-label" for="addPersonFirstName">First Name</label>
+              <input id="addPersonFirstName" v-model="person.firstName" class="form-control" name="firstName" type="text">
               <div class="form-text">Person first name</div>
             </div>
 
             <!-- last Name -->
             <div class="mb-3">
-              <label class="form-label" for="personLastName">Last Name</label>
-              <input id="personLastName" v-model="person.lastName" class="form-control" name="lastName" type="text">
+              <label class="form-label" for="addPersonLastName">Last Name</label>
+              <input id="addPersonLastName" v-model="person.lastName" class="form-control" name="lastName" type="text">
               <div class="form-text">Person last name</div>
             </div>
 
             <!-- job title -->
             <div class="mb-3">
-              <label class="form-label" for="personJobTitle">Job Title</label>
-              <input id="personJobTitle" v-model="person.jobTitle" class="form-control" name="JobTitle" type="text">
+              <label class="form-label" for="addPersonJobTitle">Job Title</label>
+              <input id="addPersonJobTitle" v-model="person.jobTitle" class="form-control" name="JobTitle" type="text">
               <div class="form-text">Person job title</div>
             </div>
 
             <!-- email -->
             <div class="mb-3">
-              <label class="form-label" for="personEmail">Email</label>
-              <input id="personEmail" v-model="person.email" class="form-control" name="email" type="email">
+              <label class="form-label" for="addPersonEmail">Email</label>
+              <input id="addPersonEmail" v-model="person.email" class="form-control" name="email" type="email">
               <div class="form-text">Person email address</div>
             </div>
 
             <!-- department -->
             <div class="mb-3">
-              <label class="form-label" for="personDepartment">Department</label>
-              <select id="personDepartment" v-model="person['departmentID']" class="form-select" @input="getLocation">
+              <label class="form-label" for="addPersonDepartment">Department</label>
+              <select id="addPersonDepartment" v-model="person['departmentID']" class="form-select" @input="getLocation">
                 <option v-for="item in departments" :key="item['@id']" :location="item['locationID'].name"
                         :value="item">{{ item.name }}
                 </option>
@@ -69,8 +69,8 @@
 
             <!-- location -->
             <div v-if="person.departmentID" class="mb-3">
-              <label class="form-label" for="personLocation">Location</label>
-              <input id="personLocation" v-model="person.departmentID.locationID.name" class="form-control" disabled
+              <label class="form-label" for="addPersonLocation">Location</label>
+              <input id="addPersonLocation" v-model="person.departmentID.locationID.name" class="form-control" disabled
                      name="location" type="text"/>
               <div class="form-text">Person location (location depends of department (to change department location you
                 have to edit it).
