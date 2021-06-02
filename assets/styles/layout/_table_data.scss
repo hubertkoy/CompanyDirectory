@@ -1,18 +1,15 @@
+table {
+  border-collapse: separate !important;
+}
 th {
+  position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 0px;
   z-index: 2;
+  background-color: white !important;
 }
 
 .table-container {
   overflow-y: auto;
-  max-height: 80vh;
-}
-
-thead {
-  border-bottom: 1px solid black !important;
-}
-
-th {
-  background-color: white !important;
+  max-height: calc(80vh - 150px);
 }
