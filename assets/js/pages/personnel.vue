@@ -66,41 +66,29 @@
             <td>{{ person.department }}</td>
             <td>{{ person.location }}</td>
             <td>
-              <i :data-id="person['@id']" class="fa fa-edit me-1" data-bs-target="#staticBackdrop"
-                 data-bs-toggle="modal"
-                 @click="getPerson"></i>
-              <i :data-id="person['@id']" class="fa fa-user-times" data-bs-target="#removePerson" data-bs-toggle="modal"
-                 @click="getPerson"></i>
+              <button class="btn btn-primary me-1">
+                <i :data-id="person['@id']" class="fa fa-edit me-1" data-bs-target="#staticBackdrop"
+                   data-bs-toggle="modal"
+                   @click="getPerson"></i>
+              </button>
+              <button class="btn btn-secondary">
+                <i :data-id="person['@id']" class="fa fa-user-times" data-bs-target="#removePerson"
+                   data-bs-toggle="modal"
+                   @click="getPerson"></i>
+              </button>
             </td>
           </tr>
           </tbody>
         </table>
       </div>
-      <div v-if="personnel.length > 0 && windowWidth <= 991" class="table-container" id="table-mobile" @scroll="getScrollPosition">
-        <table class="table caption-top">
-          <caption>
-            <ul class="list-group list-group-horizontal border-bottom">
-              <li class="list-group-item col-6 border-0">
-                <i class="fa fa-tag legend"></i> Job Title
-              </li>
-              <li class="list-group-item col-6 border-0">
-                <i class="fa fa-building legend"></i> Department
-              </li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-6 border-0">
-                <i class="fa fa-at legend"></i> Email
-              </li>
-              <li class="list-group-item col-6 border-0">
-                <i class="fa fa-globe legend"></i> Location
-              </li>
-            </ul>
-          </caption>
+      <div v-if="personnel.length > 0 && windowWidth <= 991" class="table-container" id="table-mobile"
+           @scroll="getScrollPosition">
+        <table class="table">
           <thead>
           <tr>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
-            <th scope="col">Details</th>
+            <th scope="col">Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -108,15 +96,22 @@
             <td>{{ person.firstName }}</td>
             <td>{{ person.lastName }}</td>
             <td>
-              <i v-popover="person.jobTitle" class="fa fa-tag me-1" tabindex="0" title="Job Title"></i>
-              <i v-popover="person.email" class="fa fa-at me-1" tabindex="0" title="Email"></i>
-              <i v-popover="person.department" class="fa fa-building me-1" tabindex="0" title="Department"></i>
-              <i v-popover="person.location" class="fa fa-globe me-1" tabindex="0" title="Location"></i>
-              <i :data-id="person['@id']" class="fa fa-edit me-1" data-bs-target="#staticBackdrop"
-                 data-bs-toggle="modal"
-                 @click="getPerson"></i>
-              <i :data-id="person['@id']" class="fa fa-user-times" data-bs-target="#removePerson" data-bs-toggle="modal"
-                 @click="getPerson"></i>
+              <div class="d-inline">
+                <button class="btn btn-primary me-1">
+                  <i class="fa fa-edit"
+                     :data-id="person['@id']"
+                     data-bs-target="#staticBackdrop"
+                     data-bs-toggle="modal"
+                     @click="getPerson"></i>
+                </button>
+                <button class="btn btn-secondary me-1">
+                  <i class="fa fa-user-times"
+                     :data-id="person['@id']"
+                     data-bs-target="#removePerson"
+                     data-bs-toggle="modal"
+                     @click="getPerson"></i>
+                </button>
+              </div>
             </td>
           </tr>
           </tbody>
@@ -160,7 +155,7 @@ export default {
   },
   methods: {
     getScrollPosition(el) {
-      if(el.target.scrollTop > 200){
+      if (el.target.scrollTop > 200) {
         this.$refs.goTopBtn.style.display = 'block';
       } else {
         this.$refs.goTopBtn.style.display = 'none';
@@ -211,9 +206,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.legend {
-  width: 22px;
-}
 #goTopBtn {
   display: none;
   position: fixed;

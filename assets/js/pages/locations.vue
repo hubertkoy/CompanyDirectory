@@ -10,10 +10,10 @@
       </button>
     </div>
     <div v-if="loading">
-    <div class="spinner-border" role="status">
+      <div class="spinner-border" role="status">
+      </div>
+      Loading...
     </div>
-    Loading...
-  </div>
     <div v-show="locations.length > 0" class="table-container">
       <table class="table">
         <thead>
@@ -25,8 +25,10 @@
         <tr v-for="location in locations">
           <td>{{ location.name }}</td>
           <td class="text-end">
-            <i class="fa fa-edit me-1" data-bs-target="#editLocation" data-bs-toggle="modal" @click="target = location['@id']"></i>
-            <i class="fa fa-remove me-1" data-bs-target="#removeLocation" data-bs-toggle="modal" @click="target = location['@id']"></i>
+            <button class="btn btn-primary me-1" data-bs-target="#editLocation" data-bs-toggle="modal"
+                    @click="target = location['@id']"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-secondary me-1" data-bs-target="#removeLocation" data-bs-toggle="modal"
+                    @click="target = location['@id']"><i class="fa fa-remove"></i></button>
           </td>
         </tr>
         </tbody>

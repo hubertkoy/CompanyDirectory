@@ -27,16 +27,22 @@
           <td>{{ department.name }}</td>
           <td>{{ department.locationID.name }}</td>
           <td class="text-end">
-            <i class="fa fa-edit me-1"
-               data-bs-target="#editDepartment"
-               data-bs-toggle="modal"
-               @click="target = department['@id']"
-               ></i>
-            <i class="fa fa-remove me-1"
-               data-bs-target="#removeDepartment"
-               data-bs-toggle="modal"
-               @click="target = department['@id']"
-            ></i>
+            <div class="d-inline-flex">
+              <button class="btn btn-primary me-1">
+                <i class="fa fa-edit"
+                   data-bs-target="#editDepartment"
+                   data-bs-toggle="modal"
+                   @click="target = department['@id']"
+                ></i>
+              </button>
+              <button class="btn btn-secondary me-1">
+                <i class="fa fa-remove"
+                   data-bs-target="#removeDepartment"
+                   data-bs-toggle="modal"
+                   @click="target = department['@id']"
+                ></i>
+              </button>
+            </div>
           </td>
         </tr>
         </tbody>
