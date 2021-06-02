@@ -1,9 +1,10 @@
 <template>
-    <navbar
+  <div v-if="!loaded" id="preloader"></div>
+    <navbar v-if="loaded"
         :currentPage="currentPage"
         @showPage="loadPage"
     />
-    <div class="container">
+    <div class="container" v-if="loaded">
       <locations v-if="currentPage === 'locations'"/>
       <departments v-if="currentPage === 'departments'"/>
       <personnel v-if="currentPage === 'personnel'"/>
@@ -23,6 +24,7 @@ export default {
   name: "index",
   data: () => ({
     currentPage: 'personnel',
+    loaded: false,
   }),
   components: {
     TopButton,
@@ -35,6 +37,9 @@ export default {
     loadPage(value) {
       this.currentPage = value;
     }
+  },
+  created() {
+    this.loaded = true;
   }
 }
 </script>
