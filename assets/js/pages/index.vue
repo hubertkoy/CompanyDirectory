@@ -4,11 +4,10 @@
         :currentPage="currentPage"
         @showPage="loadPage"
     />
-    <div class="container" v-if="loaded">
+    <div class="container">
       <locations v-if="currentPage === 'locations'"/>
       <departments v-if="currentPage === 'departments'"/>
-      <personnel v-if="currentPage === 'personnel'"/>
-<!--      <top-button></top-button>-->
+      <personnel v-if="currentPage === 'personnel'" @loaded="setLoaded"/>
     </div>
 </template>
 
@@ -36,11 +35,12 @@ export default {
   methods: {
     loadPage(value) {
       this.currentPage = value;
-    }
+    },
+    setLoaded() {
+      this.loaded = true;
+      console.log('loaded');
+    },
   },
-  created() {
-    this.loaded = true;
-  }
 }
 </script>
 

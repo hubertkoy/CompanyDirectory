@@ -186,6 +186,7 @@ export default {
             }
             this.personnel = data;
             this.loading = false;
+            this.$emit('loaded');
           });
     },
     getPerson(event) {
