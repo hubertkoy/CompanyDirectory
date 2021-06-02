@@ -13,11 +13,6 @@
     {% endblock %}
 </head>
 <body>
-{% if not app.user %}
-    <script>window.document.userLogged = false</script>
-    {% else %}
-    <script>window.document.userLogged = true</script>
-{% endif %}
     {% block body %}{% endblock %}
 </body>
 </html>

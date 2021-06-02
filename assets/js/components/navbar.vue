@@ -11,9 +11,6 @@
           <li class="nav-item" v-for="page in pages">
             <button class="btn nav-link" @click="loadPage(page[0])" :class="{active: currentPage === page[0].toLowerCase()}"><i :class="page[1]"></i> {{ page[0] }}</button>
           </li>
-          <li class="nav-item" v-if="!userLogged">
-            <a href="/login" class="nav-link">Login</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -25,7 +22,6 @@ export default {
   name: "navbar",
   data: () => ({
     pages: [['Departments', 'fa fa-sitemap'], ['Locations', 'fa fa-globe'], ['Personnel', 'fa fa-address-card']],
-    userLogged: null,
   }),
   props: {
     currentPage: String,
@@ -35,9 +31,6 @@ export default {
       this.$emit('showPage', value.toLowerCase());
     }
   },
-  created() {
-    this.userLogged = window.document.userLogged;
-  }
 }
 </script>
 
